@@ -1,22 +1,18 @@
-// components/Dashboard.tsx
+"use client";
 
 import React from "react";
-
-interface Ad {
-  id: number;
-  title: string;
-  downloadLink: string;
-}
+import useSWR from "swr";
+import { fetchAds } from "../services/adService";
+import AdList from "./AdList";
+import { Ad } from "../types/ad";
 
 const Dashboard: React.FC = () => {
-  // Dummy data
-  const ads: Ad[] = [
-    { id: 1, title: "Summer Sale Promo", downloadLink: "#" },
-    { id: 2, title: "New Product Launch", downloadLink: "#" },
-    { id: 3, title: "Holiday Discount Offer", downloadLink: "#" },
-  ];
+  const { data: ads, error } = useSWR<Ad[]>("/api/ads", fetchAds);
 
-  const today: string = new Date().toLocaleDateString();
+  if (error) return <div>Error loading ads.</div>;
+  if (!ads) return <div>Loading...</div>;
+
+  const today = new Date().toLocaleDateString();
 
   return (
     <div className="p-6">
@@ -24,29 +20,7 @@ const Dashboard: React.FC = () => {
       <p className="mb-2">Date: {today}</p>
       <h2 className="text-xl mb-4">Total Ads: {ads.length}</h2>
 
-      <table className="min-w-full bg-white border">
-        <thead className="bg-gray-200">
-          <tr>
-            <th className="py-2 px-4 border-b text-left">Ad Title</th>
-            <th className="py-2 px-4 border-b text-left">Download</th>
-          </tr>
-        </thead>
-        <tbody>
-          {ads.map((ad) => (
-            <tr key={ad.id} className="hover:bg-gray-100">
-              <td className="py-2 px-4 border-b">{ad.title}</td>
-              <td className="py-2 px-4 border-b">
-                <a
-                  href={ad.downloadLink}
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                >
-                  Download
-                </a>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <AdList ads={ads} />
     </div>
   );
 };
