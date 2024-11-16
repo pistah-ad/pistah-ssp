@@ -1,4 +1,4 @@
-import { AdBoardType } from "../enums/AdBoardType";
+import { AdBoardType } from "@/app/enums/AdBoardType";
 
 export type aAdBoard =
   | {

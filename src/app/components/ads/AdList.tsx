@@ -1,6 +1,6 @@
 import React from "react";
-import { AdWithBoard } from "../../types/ad";
 import AdItem from "./AdItem";
+import { AdWithBoard } from "@/types/ad";
 
 interface AdListProps {
   ads: AdWithBoard[];
