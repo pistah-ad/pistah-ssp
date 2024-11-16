@@ -1,3 +1,5 @@
+import { AdBoardType } from "@/app/enums/AdBoardType";
+
 export interface Ad {
   id: number;
   title: string;
@@ -8,18 +10,35 @@ export interface Ad {
   adDuration: string;
 }
 
-export interface AdBoard {
-  id: number;
-  boardName: string;
-  location: string;
-  dimensions: string;
-  boardType: string;
-  isAvailable: boolean;
-  dailyRate: number;
-  operationalHours: string;
-  ownerContact: string;
-  lastMaintenanceDate: string;
-}
+export type AdBoard =
+  | {
+      boardType: AdBoardType.STATIC;
+      id: number;
+      boardName: string;
+      location: string;
+      dimensions: string;
+      isAvailable: boolean;
+      dailyRate: number;
+      operationalHours: string;
+      ownerContact: string;
+      lastMaintenanceDate: Date;
+      additionalNotes?: string;
+    }
+  | {
+      boardType: AdBoardType.DIGITAL | AdBoardType.MOVING_DIGITAL;
+      id: number;
+      boardName: string;
+      location: string;
+      dimensions: string;
+      isAvailable: boolean;
+      dailyRate: number;
+      operationalHours: string;
+      ownerContact: string;
+      lastMaintenanceDate: Date;
+      digitalFeatures: string[];
+      mobilityDetails?: string; // Only for moving digital boards
+      additionalNotes?: string;
+    };
 
 export interface AdWithBoard extends Ad {
   adBoard?: AdBoard | null;

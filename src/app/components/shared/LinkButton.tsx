@@ -13,6 +13,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({ link }) => {
     try {
       window.open(link, "_blank", "noopener,noreferrer");
     } catch (err) {
+      console.log(err);
       setError("Unable to open the link. Please check your browser settings.");
     }
   };

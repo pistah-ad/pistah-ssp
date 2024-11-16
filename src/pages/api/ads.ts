@@ -20,6 +20,7 @@ export default async function handler(
     const ads = fetchFilteredAds(date);
     res.status(200).json(ads);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 }
