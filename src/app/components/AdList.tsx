@@ -11,7 +11,7 @@ const AdList: React.FC<AdListProps> = ({ ads }) => (
     <thead className="bg-gray-200">
       <tr>
         <th className="py-2 px-4 border-b text-left">Ad Title</th>
-        <th className="py-2 px-4 border-b text-left">Download</th>
+        <th className="py-2 px-4 border-b text-left">Open Ad</th>
       </tr>
     </thead>
     <tbody>

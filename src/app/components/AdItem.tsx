@@ -1,7 +1,6 @@
 import React from "react";
 import { Ad } from "../types/ad";
-import DownloadButton from "./DownloadButton";
-
+import LinkButton from "./shared/LinkButton";
 interface AdItemProps {
   ad: Ad;
 }
@@ -10,7 +9,7 @@ const AdItem: React.FC<AdItemProps> = ({ ad }) => (
   <tr>
     <td className="py-2 px-4 border-b">{ad.title}</td>
     <td className="py-2 px-4 border-b">
-      <DownloadButton downloadLink={ad.downloadLink} />
+      <LinkButton link={ad.downloadLink} />
     </td>
   </tr>
 );
