@@ -1,9 +1,9 @@
 import React from "react";
-import { Ad } from "../types/ad";
+import { AdWithBoard } from "../../types/ad";
 import AdItem from "./AdItem";
 
 interface AdListProps {
-  ads: Ad[];
+  ads: AdWithBoard[];
 }
 
 const AdList: React.FC<AdListProps> = ({ ads }) => (
@@ -14,7 +14,16 @@ const AdList: React.FC<AdListProps> = ({ ads }) => (
           Ad Title
         </th>
         <th className="py-2 px-4 border-b text-left text-gray-700 dark:text-gray-300">
-          Download
+          Board Name
+        </th>
+        <th className="py-2 px-4 border-b text-left text-gray-700 dark:text-gray-300">
+          Location
+        </th>
+        <th className="py-2 px-4 border-b text-left text-gray-700 dark:text-gray-300">
+          Duration
+        </th>
+        <th className="py-2 px-4 border-b text-left text-gray-700 dark:text-gray-300">
+          Actions
         </th>
       </tr>
     </thead>

@@ -1,35 +1,25 @@
-// pages/api/ads.ts
-
 import { NextApiRequest, NextApiResponse } from "next";
-import { Ad } from "../../app/types/ad";
+import { fetchFilteredAds } from "../../services/adService";
 
-export default (_: NextApiRequest, res: NextApiResponse) => {
-  const ads: Ad[] = [
-    {
-      id: 1,
-      title: "Summer Sale Promo",
-      downloadLink:
-        "https://drive.google.com/file/d/1HaRREfyGlks28fUJ2IevKRuwq6j0B4E5/view?usp=sharing",
-    },
-    {
-      id: 2,
-      title: "New Product Launch",
-      downloadLink:
-        "https://drive.google.com/file/d/1HaRREfyGlks28fUJ2IevKRuwq6j0B4E5/view?usp=sharing",
-    },
-    {
-      id: 3,
-      title: "Holiday Discount Offer",
-      downloadLink:
-        "https://drive.google.com/file/d/1HaRREfyGlks28fUJ2IevKRuwq6j0B4E5/view?usp=sharing",
-    },
-    {
-      id: 4,
-      title: "Holiday Discount Offer 2",
-      downloadLink:
-        "https://drive.google.com/file/d/1HaRREfyGlks28fUJ2IevKRuwq6j0B4E5/view?usp=sharing",
-    },
-  ];
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method !== "POST") {
+    res.setHeader("Allow", ["POST"]);
+    return res.status(405).json({ error: `Method ${req.method} Not Allowed` });
+  }
 
-  res.status(200).json(ads);
-};
+  const { date } = req.body;
+
+  if (!date) {
+    return res.status(400).json({ error: "Date is required" });
+  }
+
+  try {
+    const ads = fetchFilteredAds(date);
+    res.status(200).json(ads);
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}
