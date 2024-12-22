@@ -84,10 +84,7 @@ export default function Header({ navLinks = [] }: HeaderProps) {
           <Link
             key={link.href}
             href={link.href}
-            className={`${
-              pathname === link.href ? "underline underline-offset-4" : ""
-            } font-medium`}
-          >
+            className={`${pathname === link.href ? "underline underline-offset-4" : ""} font-medium`}>
             {link.label}
           </Link>
         ))}
