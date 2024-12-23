@@ -16,14 +16,17 @@ export default function AppHome() {
   }, [status, router]);
 
   if (status === "loading") {
+    console.log("Loading...");
     console.log(session);
     return <div>Loading...</div>;
   }
   if (status === "authenticated") {
+    console.log("Authenticated");
     console.log(session);
     redirect("/dashboard");
   }
   if (status === "unauthenticated") {
+    console.log("Unauthenticated");
     console.log(session);
     redirect("/login");
   }
