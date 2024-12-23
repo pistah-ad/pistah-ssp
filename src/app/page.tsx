@@ -6,7 +6,7 @@ import router from "next/router";
 import { useEffect } from "react";
 
 export default function AppHome() {
-  const { status } = useSession();
+  const { data: session, status } = useSession();
   useEffect(() => {
     if (status === "unauthenticated") {
       router.push("/login"); // Redirect to login if not authenticated
@@ -15,11 +15,16 @@ export default function AppHome() {
     }
   }, [status, router]);
 
-  if (status === "loading") return <div>Loading...</div>;
+  if (status === "loading") {
+    console.log(session);
+    return <div>Loading...</div>;
+  }
   if (status === "authenticated") {
+    console.log(session);
     redirect("/dashboard");
   }
   if (status === "unauthenticated") {
+    console.log(session);
     redirect("/login");
   }
   return null;
