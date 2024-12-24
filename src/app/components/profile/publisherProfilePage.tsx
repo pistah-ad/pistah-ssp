@@ -8,7 +8,8 @@ import Image from "next/image";
 
 const PublisherProfilePage: React.FC = () => {
   const { data: session } = useSession();
-  // eslint-disable @typescript-eslint/no-unused-vars
+  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [userProfile, setUserProfile] = useState(null);
   const [formData, setFormData] = useState<{
     profilePicUrl: string | File;
