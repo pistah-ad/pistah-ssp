@@ -87,6 +87,7 @@ const PublisherInventoryPage: React.FC = () => {
       }
     } catch (error) {
       addToast("Failed to add inventory.", "error");
+      console.log(error);
     }
   };
 
