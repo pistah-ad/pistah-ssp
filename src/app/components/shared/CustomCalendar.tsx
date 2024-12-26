@@ -15,7 +15,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
   const [hoveredDate, setHoveredDate] = useState<Date | null>(null);
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
-  const handleDateClick = (e: any, date: Date) => {
+  const handleDateClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, date: Date) => {
     e.preventDefault()
     if (!startDate || (startDate && endDate)) {
       // Select From date
