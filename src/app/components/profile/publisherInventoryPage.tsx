@@ -15,7 +15,7 @@ import DeleteIcon from "@/icons/deleteIcon";
 import AddIcon from "@/icons/addIcon";
 import Loader from "../shared/LoaderComponent";
 import { useToast } from "@/app/context/ToastContext";
-import Image from "next/image";
+import Image from 'next/image';
 
 const PublisherInventoryPage: React.FC = () => {
   const [adBoards, setAdBoards] = useState<AdBoard[]>([]);
@@ -204,7 +204,7 @@ const PublisherInventoryPage: React.FC = () => {
                   className="p-4 border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-lg shadow flex items-center space-x-4" // Added space-x-4 for horizontal spacing
                 >
                   {/* Image on the left */}
-                  <div className="relative w-24 h-24">
+                  <div className="relative w-24 h-24"> 
                     <Image
                       src="https://150763658.v2.pressablecdn.com/wp-content/uploads/2023/02/image-1.webp"
                       alt="Ad Thumbnail"
@@ -215,9 +215,7 @@ const PublisherInventoryPage: React.FC = () => {
                   </div>
 
                   {/* Ad Board Details on the right */}
-                  <div className="flex-1">
-                    {" "}
-                    {/* Allows the content to take the remaining space */}
+                  <div className="flex-1"> {/* Allows the content to take the remaining space */}
                     <p>
                       <strong>Title:</strong> {adBoard.boardName}
                     </p>
@@ -257,6 +255,7 @@ const PublisherInventoryPage: React.FC = () => {
                 </li>
               ))}
             </ul>
+
           </div>
         </div>
 
