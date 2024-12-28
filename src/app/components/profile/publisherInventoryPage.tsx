@@ -49,7 +49,7 @@ const PublisherInventoryPage: React.FC = () => {
     setIsEditing(false);
     setCurrentAdBoard({
       id: undefined,
-      pic: null,
+      image: null,
       boardType: AdBoardType.STATIC,
       boardName: "",
       location: "",
@@ -170,10 +170,11 @@ const PublisherInventoryPage: React.FC = () => {
   const validateForm = () => {
     return currentAdBoard
       ? currentAdBoard.boardName !== "" &&
-          currentAdBoard.location !== "" &&
-          currentAdBoard.dailyRate > 0 &&
-          currentAdBoard.ownerContact &&
-          /^\d{10}$/.test(currentAdBoard.ownerContact)
+      currentAdBoard.location !== "" &&
+      currentAdBoard.dailyRate > 0 &&
+      currentAdBoard.ownerContact &&
+      /^\d{10}$/.test(currentAdBoard.ownerContact) &&
+      currentAdBoard.image && currentAdBoard.image.size < 5 * 1024 * 1024
       : false;
   };
 
@@ -261,7 +262,10 @@ const PublisherInventoryPage: React.FC = () => {
 
         {isModalOpen && currentAdBoard && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md w-full max-w-2xl relative">
+            <div
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md relative"
+              style={{ width: "60%", maxWidth: "calc(2xl * 1.1)" }} // Increased width by 10%
+            >
               {/* Header */}
               <div className="absolute top-0 left-0 w-full p-4 bg-[#001464] dark:bg-gray-800 rounded-t-lg border-b border-gray-300 dark:border-gray-600">
                 <h2 className="text-xl font-semibold text-white">
@@ -270,11 +274,11 @@ const PublisherInventoryPage: React.FC = () => {
               </div>
 
               {/* Form Content */}
-              <div className="mt-16 mb-16">
-                <AdBoardForm
-                  adBoard={currentAdBoard}
-                  onChange={handleAdBoardChange}
-                />
+              <div
+                className="mt-16 mb-16 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-300"
+                style={{ maxHeight: "65vh", marginRight: "-1rem", paddingRight: "1rem" }} // Adjust margin and padding
+              >
+                <AdBoardForm adBoard={currentAdBoard} onChange={handleAdBoardChange} />
               </div>
 
               {/* Footer */}
@@ -295,6 +299,7 @@ const PublisherInventoryPage: React.FC = () => {
             </div>
           </div>
         )}
+
 
         {isDeleteConfirmationOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
